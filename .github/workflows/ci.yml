@@ -69,18 +69,18 @@ jobs:
           PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           APP_VERSION: ${{ github.sha }}
   inttest:
+    name: integ test
     runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-      services:
-        - my-app:
-            image: CONTAINER_LATEST_IMAGE
-            ports:
-              - "8000:8000"
-            crendentials:
-              username: yanntoque
-              password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    needs:
+      - build
+    services:
+      my-app:
+        image: CONTAINER_LATEST_IMAGE
+        credentials:
+          username: yanntoque
+          password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+        ports:
+          - 8000:8000
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
