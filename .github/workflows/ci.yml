@@ -9,15 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "example"
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: github/super-linter@v3
-        env:
-          VALIDATE_ALL_CODEBASE: false
-          DEFAULT_BRANCH: dojo
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: github/super-linter@v3
+  #       env:
+  #         VALIDATE_ALL_CODEBASE: false
+  #         DEFAULT_BRANCH: dojo
+  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   sast:
     runs-on: ubuntu-latest
     steps:
