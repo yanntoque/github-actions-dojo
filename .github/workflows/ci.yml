@@ -68,3 +68,22 @@ jobs:
         env:
           PAT: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
           APP_VERSION: ${{ github.sha }}
+  inttest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-python@v2
+      services:
+        - my-app:
+            image: CONTAINER_LATEST_IMAGE
+            ports:
+              - "8000:8000"
+            crendentials:
+              username: yanntoque
+              password: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+      - run: npm install -g bats
+      - run: bats -v
+      - run: ./github-actions-scripts/test_bats.sh
